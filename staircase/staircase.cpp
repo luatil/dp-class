@@ -22,6 +22,7 @@ auto number_of_ways_to_climb_staircase(int number_of_steps) -> int
     return total_number_of_ways;
 }
 
+// Returns number of ways to climb the staircase with up to max_steps.
 auto total_limited_ways(int steps, int max_steps) -> int
 {
     int dp[steps][max_steps] = {0};
@@ -41,11 +42,28 @@ auto total_limited_ways(int steps, int max_steps) -> int
     return (steps >= 1 && max_steps >= 1 ? dp[steps-1][max_steps-1] : -1);
 }
 
+auto total_limited_ways_ver2(int steps, int max_steps) -> int
+{
+    vector<vector<int> > dp(steps, vector<int>(max_steps));
+
+    fill(dp[0].begin(), dp[0].end(), 1);
+    fill(dp[1].begin() + 1, dp[1].end(), 1);
+
+    for(int i = 2; i < steps; i++)
+    {
+        for(int k = 1; k < max_steps; k++)
+            dp[i][k] = dp[i-1][k-1] + dp[i-2][k-1];
+    }
+
+    return (steps >= 1 && max_steps >= 1 ? dp[steps-1][max_steps-1] : -1);
+
+}
+
 void simple_example_1()
 {
-    cout << "5:4 " << total_limited_ways(5, 4) << '\n';
-    cout << "5:5 " << total_limited_ways(5, 5) << '\n';
-    cout << "7:7 " << total_limited_ways(7, 7) << '\n';
+    cout << "5:4 " << total_limited_ways_ver2(5, 4) << '\n';
+    cout << "5:5 " << total_limited_ways_ver2(5, 5) << '\n';
+    cout << "7:7 " << total_limited_ways_ver2(7, 7) << '\n';
 }
 
 int main()
