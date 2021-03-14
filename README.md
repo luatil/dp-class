@@ -10,4 +10,5 @@ Links:
 Mit Classes: 
 Errichto Classes:
 
-
+- https://www.urionlinejudge.com.br/judge/pt/problems/view/1224
+- https://atcoder.jp/contests/dp/tasks/dp_l
